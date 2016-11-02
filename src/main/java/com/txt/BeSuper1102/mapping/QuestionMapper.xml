@@ -9,21 +9,44 @@
 		<result column="credit" property="credit" jdbcType="INTEGER" />
 		<result column="player_id" property="player_id" jdbcType="INTEGER" />
 		<result column="isOpen" property="isOpen" jdbcType="VARCHAR" />
-		<!-- <collection property="answers" javaType="ArrayList"
-			column="id" ofType="Answer" select="getAnswerByQuestionId"></collection> -->
+		<collection property="answers" javaType="ArrayList"
+			column="id" ofType="Answer" select="getAnswerByQuestionId"/>
 	</resultMap>
+	
+	<resultMap id="AnswerResultMap" type="Answer">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="value" property="value" jdbcType="VARCHAR" />
+		<result column="question_id" property="question_id" jdbcType="INTEGER" />
+		<result column="player_id" property="player_id" jdbcType="INTEGER" />
+		<result column="best" property="best" jdbcType="VARCHAR" />
+		<association property="question" column="question_id" javaType="Question" select="selectQuestionById" />
+	</resultMap>
+	
 
 	<select id="getAllQuestion" resultMap="QuestionResultMap">
 		select * from question
 	</select>
 	
-	<!-- <select id="getAllQuestion" resultType="Question">
-		select * from question
-	</select> -->
-	
-	<!-- <select id="getAnswerByQuestionId" resultType="Answer">
+	<select id="getAnswerByQuestionId" resultType="Answer">
 		select * from answer where question_id=#{id}
-	</select> -->
+	</select>
+	
+	<select id="getQuestionByPlayerId" parameterType="Player" resultMap="QuestionResultMap">
+		select * from question where player_id=#{id}
+	</select>
+	
+	<select id="getQuestionByIsOpen" resultMap="QuestionResultMap">
+		select * from question where isOpen='N'
+	</select>
+	
+	<select id="getQuestionById" parameterType="int" resultMap="QuestionResultMap">
+		select * from question where id=#{id}
+	</select>
+	
+	<select id="selectQuestionById" resultType="Question">
+		select * from question where id=#{question_id}
+	</select>
+	
 
 	
 </mapper> 

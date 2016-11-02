@@ -8,17 +8,20 @@ public class Question {
 	private String value;
 	private int credit;
 	private int player_id;
-	private boolean isOpen;
+	private String isOpen;
 	private List<Answer> answers=new ArrayList<>();
 	
 	
+	public Question() {
+		super();
+	}
 	public Question(int id, String value, int credit, int player_id) {
 		super();
 		this.id = id;
 		this.value = value;
 		this.credit = credit;
 		this.player_id = player_id;
-		this.isOpen=true;
+		this.isOpen="N";
 	}
 	public String getValue() {
 		return value;
@@ -39,18 +42,19 @@ public class Question {
 		this.player_id = player_id;
 	}
 	
-	
-	public boolean isOpen() {
-		return isOpen;
-	}
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+	public String getIsOpen() {
+		return isOpen;
+	}
+	public void setIsOpen(String isOpen) {
+		this.isOpen = isOpen;
 	}
 	public List<Answer> getAnswers() {
 		return answers;
@@ -58,9 +62,11 @@ public class Question {
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
 	}
+	
+	
 	@Override
 	public String toString() {
-		if(isOpen){
+		if(isOpen.equals("N")){
 			return "[UNSLOVED] Question [id=" + id +", credit=" + credit + ", player_id=" + player_id+
 					" , value=" + value +  "]"+ " number of answers:"+answers.size();
 		}else{			
@@ -69,17 +75,5 @@ public class Question {
 		}
 	}
 
-//	@Override
-//	public String toString() {
-//		String string;
-//		if (isOpen) {
-//			string = "[UNSLOVED]" + "Question [id=" + id + ",value=" + value + ", credit="
-//					+ credit + ", ask by player" + player_id + ", number of answers:"+answers.size()+"]";
-//		} else {
-//			string =  "[SLOVED]  " + "Question [id=" + id + ",value=" + value + ", credit="
-//					+ credit + ", ask by player" + player_id + ", number of answers:"+answers.size()+"]";
-//		}
-//		return string;
-//	}
 	
 }

@@ -5,7 +5,7 @@
 	<!-- property -->
 	<properties resource="config.properties">
 		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="password" value="niklaus1993" />
 	</properties>
 
 	<!-- Alias -->
@@ -29,5 +29,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/txt/BeSuper1102/mapping/PlayerMapper.xml" />
+		<mapper resource="com/txt/BeSuper1102/mapping/QuestionMapper.xml" />
 	</mappers>
 </configuration>

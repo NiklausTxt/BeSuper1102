@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.txt.BeSuper1102.TestMain;
+import com.txt.BeSuper1102.pojo.Player;
 import com.txt.BeSuper1102.pojo.Question;
 
 public class QuestionDao {
@@ -24,5 +25,29 @@ public class QuestionDao {
 		
 		session.close();
 		return questions;
+	}
+	
+	public static List<Question> getAllQuestionByPlayerId(Player player) {
+		session = sessionFactory.openSession();
+		statement = "com.txt.BeSuper1102.mapping.QuestionMapper.getQuestionByPlayerId";
+		List<Question> questions = session.selectList(statement,player);
+		session.close();
+		return questions;
+	}
+	
+	public static List<Question> getAllQuestionByIsOpen() {
+		session = sessionFactory.openSession();
+		statement = "com.txt.BeSuper1102.mapping.QuestionMapper.getQuestionByIsOpen";
+		List<Question> questions = session.selectList(statement);
+		session.close();
+		return questions;
+	}
+	
+	public static Question getAllQuestionById(int id) {
+		session = sessionFactory.openSession();
+		statement = "com.txt.BeSuper1102.mapping.QuestionMapper.getQuestionById";
+		Question question = session.selectOne(statement,id);
+		session.close();
+		return question;
 	}
 }
