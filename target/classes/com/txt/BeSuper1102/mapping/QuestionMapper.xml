@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>	
+<!DOCTYPE mapper    
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txt.BeSuper1102.mapping.QuestionMapper">
+	<resultMap id="QuestionResultMap" type="Question">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="value" property="value" jdbcType="VARCHAR" />
+		<result column="credit" property="credit" jdbcType="INTEGER" />
+		<result column="player_id" property="player_id" jdbcType="INTEGER" />
+		<result column="isOpen" property="isOpen" jdbcType="VARCHAR" />
+		<!-- <collection property="answers" javaType="ArrayList"
+			column="id" ofType="Answer" select="getAnswerByQuestionId"></collection> -->
+	</resultMap>
+
+	<select id="getAllQuestion" resultMap="QuestionResultMap">
+		select * from question
+	</select>
+	
+	<!-- <select id="getAllQuestion" resultType="Question">
+		select * from question
+	</select> -->
+	
+	<!-- <select id="getAnswerByQuestionId" resultType="Answer">
+		select * from answer where question_id=#{id}
+	</select> -->
+
+	
+</mapper> 
