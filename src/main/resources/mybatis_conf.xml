@@ -29,5 +29,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/txt/BeSuper1102/mapping/PlayerMapper.xml" />
+		<mapper resource="com/txt/BeSuper1102/mapping/QuestionMapper.xml" />
 	</mappers>
 </configuration>
