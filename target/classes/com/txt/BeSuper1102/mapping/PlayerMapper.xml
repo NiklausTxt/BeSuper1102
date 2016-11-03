@@ -21,14 +21,10 @@
 		select * from player where id=#{uid}
 	</select>
 
-	<update id="updatePlayer" parameterType="Player">
-		UPDATE `player` SET
-		`score`=#{score} WHERE `id`=#{id}
-	</update>
-
 	<select id="getPlayerByName" parameterType="String" resultType="Player">
 		select * from player where username=#{uid}
 	</select>
+
 
 	<select id="userLogin" parameterType="Player" resultType="Player">
 		select
@@ -43,7 +39,7 @@
 		(#{name}, #{username}, #{password});
 	</insert>
 
-	<!-- <update id="updatePlayer" parameterType="Player">
+	<update id="updatePlayer" parameterType="Player">
 		UPDATE `iwantbesuper`.`player` SET `score`=#{score} WHERE `id`=#{id};
-	</update> -->
+	</update>
 </mapper> 

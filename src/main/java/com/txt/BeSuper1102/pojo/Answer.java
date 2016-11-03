@@ -5,14 +5,20 @@ public class Answer {
 	private String value;
 	private int question_id;
 	private int player_id;
-	private boolean best;
+	private String best;
+	private Question question;
+	
+	
+	public Answer() {
+		super();
+	}
 	public Answer(int id, String value, int question_id, int player_id) {
 		super();
 		this.id = id;
 		this.value = value;
 		this.question_id = question_id;
 		this.player_id = player_id;
-		this.best=false;
+		this.best="N";
 	}
 	public String getValue() {
 		return value;
@@ -34,10 +40,10 @@ public class Answer {
 	}
 
 
-	public boolean isBest() {
+	public String isBest() {
 		return best;
 	}
-	public void setBest(boolean best) {
+	public void setBest(String best) {
 		this.best = best;
 	}
 	public int getId() {
@@ -50,6 +56,12 @@ public class Answer {
 	public String toString() {
 		return "Answer [id=" + id + ", question_id=" + question_id + ", player_id=" + player_id
 				+ ", best=" + best+ ", value=" + value  + "]";
+	}
+	public Question getQuestion() {
+		return question;
+	}
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 	
 	

@@ -5,8 +5,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.txt.BeSuper1102.command.impl.PlayerAcceptCommand;
+import com.txt.BeSuper1102.command.impl.PlayerAnswerCommand;
+import com.txt.BeSuper1102.command.impl.PlayerAskCommand;
 import com.txt.BeSuper1102.command.impl.PlayerHelpCommand;
 import com.txt.BeSuper1102.command.impl.PlayerListCommand;
+import com.txt.BeSuper1102.command.impl.PlayerScoreCommand;
 import com.txt.BeSuper1102.pojo.Player;
 
 public class PlayerCommandFactory extends SystemCommandFactory{
@@ -21,10 +25,10 @@ public class PlayerCommandFactory extends SystemCommandFactory{
 	static {
 		commandMap.put(CommandCode.LIST, PlayerListCommand.class);
 		commandMap.put(CommandCode.HELP, PlayerHelpCommand.class);
-//		commandMap.put(CommandCode.ANSWER, PlayerAnswerCommand.class);
-//		commandMap.put(CommandCode.ACCEPT, PlayerAcceptCommand.class);
-//		commandMap.put(CommandCode.ASK, PlayerAskCommand.class);
-//		commandMap.put(CommandCode.SCORE, PlayerScoreCommand.class);
+		commandMap.put(CommandCode.ANSWER, PlayerAnswerCommand.class);
+		commandMap.put(CommandCode.ACCEPT, PlayerAcceptCommand.class);
+		commandMap.put(CommandCode.ASK, PlayerAskCommand.class);
+		commandMap.put(CommandCode.SCORE, PlayerScoreCommand.class);
 	}
 	
 	@Override

@@ -17,7 +17,10 @@ public class LoginCommand extends SystemCommand{
 			username = Console.askUserInput("请输入用户名：");
 		}
 		String password = Console.askUserInput("请输入密码：");
-		Player player = PlayerDao.Login(username, password);
+		Player player = new Player();
+		player.setUsername(username);
+		player.setPassword(password);
+		player = PlayerDao.Login(player);
 		if(player==null){
 			Console.println("登录失败，密码错误");
 			return ;

@@ -9,21 +9,42 @@
 		<result column="credit" property="credit" jdbcType="INTEGER" />
 		<result column="player_id" property="player_id" jdbcType="INTEGER" />
 		<result column="isOpen" property="isOpen" jdbcType="VARCHAR" />
-		<!-- <collection property="answers" javaType="ArrayList"
-			column="id" ofType="Answer" select="getAnswerByQuestionId"></collection> -->
+		<collection property="answers" javaType="ArrayList" column="id"
+			ofType="Answer" select="getAnswerByQuestionId" />
 	</resultMap>
 
 	<select id="getAllQuestion" resultMap="QuestionResultMap">
 		select * from question
 	</select>
-	
-	<!-- <select id="getAllQuestion" resultType="Question">
-		select * from question
-	</select> -->
-	
-	<!-- <select id="getAnswerByQuestionId" resultType="Answer">
-		select * from answer where question_id=#{id}
-	</select> -->
 
+	<select id="getAnswerByQuestionId" resultType="Answer">
+		select * from
+		answer where question_id=#{id}
+	</select>
+
+	<select id="getQuestionByPlayerId" parameterType="Player"
+		resultMap="QuestionResultMap">
+		select * from question where player_id=#{id}
+	</select>
+
+	<select id="getQuestionByIsOpen" resultMap="QuestionResultMap">
+		select * from
+		question where isOpen='N'
+	</select>
+
+	<select id="getQuestionById" parameterType="int" resultMap="QuestionResultMap">
+		select * from question where id=#{id}
+	</select>
+
+	<insert id="insertQuestion" parameterType="Question"
+		keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO `iwantbesuper`.`question` (`value`, `credit`, `player_id`)
+		VALUES (#{value}, #{credit}, #{player_id})
+	</insert>
 	
+	<update id="updateQuestion" parameterType="Question">
+	UPDATE `iwantbesuper`.`question` SET `isOpen`='N' WHERE `id`=#{id};
+	</update>
+
+
 </mapper> 

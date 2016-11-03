@@ -1,24 +1,17 @@
 package com.txt.BeSuper1102.mapping.dao;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.txt.BeSuper1102.TestMain;
 import com.txt.BeSuper1102.pojo.Player;
 
 public class PlayerDao {
-	static String resource = "mybatis_conf.xml";
-	static InputStream is = TestMain.class.getClassLoader().getResourceAsStream(resource);
-	static SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
+//	static String resource = "mybatis_conf.xml";
+//	static InputStream is = TestMain.class.getClassLoader().getResourceAsStream(resource);
+//	static SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 	static SqlSession session;
 	static String statement;
 	public static boolean isUsernameExists(String name) {
-		session = sessionFactory.openSession();
+		session = SessionFactory.getInstance().openSession();
 		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.getPlayerByName";
 		Player player = session.selectOne(statement,name);
 		session.close();
@@ -29,11 +22,16 @@ public class PlayerDao {
 		}
 	}
 	
-	public static Player Login(String username, String password){
-		session = sessionFactory.openSession();
-		Player player = new Player();
-		player.setUsername(username);
-		player.setPassword(password);
+	public static Player getPlayerById(int id){
+		session = SessionFactory.getInstance().openSession();
+		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.getPlayerById";
+		Player player = session.selectOne(statement,id);
+		session.close();
+		return player;
+	}
+	
+	public static Player Login(Player player){
+		session = SessionFactory.getInstance().openSession();
 		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.userLogin";
 		player = session.selectOne(statement,player);
 		session.close();
@@ -41,20 +39,32 @@ public class PlayerDao {
 	}
 	
 	public static int Sign(Player player){
-		session = sessionFactory.openSession();
+		session = SessionFactory.getInstance().openSession();
 		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.insertPlayer";
-		int count = session.insert(statement,player);
-		session.commit();
-		session.close();
+		int count = 0;
+		try {
+			count = session.insert(statement,player);
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}finally {
+			session.close();
+		}
 		return count;
 	}
 	
-//	public static int UpdateScore(Player player){
-//		session = sessionFactory.openSession();
-//		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.updatePlayer";
-//		int count = session.update(statement,player);
-//		session.commit();
-//		session.close();
-//		return count;
-//	}
+	public static int UpdateScore(Player player){
+		session = SessionFactory.getInstance().openSession();
+		statement = "com.txt.BeSuper1102.mapping.PlayerMapper.updatePlayer";
+		int count = 0;
+		try {
+			count = session.update(statement,player);
+			session.commit();
+		} catch (Exception e) {
+			session.rollback();
+		}finally {
+			session.close();
+		}
+		return count;
+	}
 }
